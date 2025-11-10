@@ -1,8 +1,11 @@
 import { Home, TrendingUp, Plus, Bell, Menu, ChevronRight, AlertTriangle, Flag, Lightbulb } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { MiniChart } from "@/components/MiniChart";
 
 const FraudDashboard = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background pb-20">
       {/* Header */}
@@ -40,18 +43,21 @@ const FraudDashboard = () => {
           title="Anomaly Alert"
           description="Duplicate charges & unauthorized transactions"
           delay="0.3s"
+          onClick={() => navigate("/anomaly-alert")}
         />
         <FeatureCard
           icon={<Flag className="w-6 h-6 text-primary" />}
           title="Flagged Transactions"
           description="Predict and list suspicious or unverified payments"
           delay="0.4s"
+          onClick={() => navigate("/flagged-transactions")}
         />
         <FeatureCard
           icon={<Lightbulb className="w-6 h-6 text-primary" />}
           title="Tailored Recommendations"
           description="Personalized insights"
           delay="0.5s"
+          onClick={() => navigate("/recommendations")}
         />
       </div>
 
@@ -76,13 +82,15 @@ interface FeatureCardProps {
   title: string;
   description: string;
   delay: string;
+  onClick: () => void;
 }
 
-const FeatureCard = ({ icon, title, description, delay }: FeatureCardProps) => {
+const FeatureCard = ({ icon, title, description, delay, onClick }: FeatureCardProps) => {
   return (
     <Card 
       className="glass-card shadow-soft rounded-2xl p-5 border-0 hover:shadow-elevated transition-all duration-300 cursor-pointer animate-slide-up"
       style={{ animationDelay: delay }}
+      onClick={onClick}
     >
       <div className="flex items-center gap-4">
         <div className="bg-secondary rounded-2xl p-3 flex-shrink-0">
